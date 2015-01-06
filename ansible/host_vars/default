@@ -6,7 +6,7 @@ wordpress_ip: 172.24.4.3
 service_token: tokentoken
 swift_hash: 66a3d6b56c1f479c8b4e70ab5c2000f5
 swift_replicas: 1
-branch: stable/icehouse
+branch: stable/juno
 reclone: yes
 api_rate_limit: False
 logdays: 2
