@@ -1,0 +1,53 @@
+Usage: ansible <host-pattern> [options]
+
+Options:
+  -a MODULE_ARGS, --args=MODULE_ARGS
+                        module arguments
+  -k, --ask-pass        ask for SSH password
+  --ask-su-pass         ask for su password
+  -K, --ask-sudo-pass   ask for sudo password
+  --ask-vault-pass      ask for vault password
+  -B SECONDS, --background=SECONDS
+                        run asynchronously, failing after X seconds
+                        (default=N/A)
+  -C, --check           don't make any changes; instead, try to predict some
+                        of the changes that may occur
+  -c CONNECTION, --connection=CONNECTION
+                        connection type to use (default=smart)
+  -f FORKS, --forks=FORKS
+                        specify number of parallel processes to use
+                        (default=5)
+  -h, --help            show this help message and exit
+  -i INVENTORY, --inventory-file=INVENTORY
+                        specify inventory host file
+                        (default=/usr/local/etc/ansible/hosts)
+  -l SUBSET, --limit=SUBSET
+                        further limit selected hosts to an additional pattern
+  --list-hosts          outputs a list of matching hosts; does not execute
+                        anything else
+  -m MODULE_NAME, --module-name=MODULE_NAME
+                        module name to execute (default=command)
+  -M MODULE_PATH, --module-path=MODULE_PATH
+                        specify path(s) to module library (default=/usr/local/
+                        Cellar/ansible/1.7.1/share/ansible/)
+  -o, --one-line        condense output
+  -P POLL_INTERVAL, --poll=POLL_INTERVAL
+                        set the poll interval if using -B (default=15)
+  --private-key=PRIVATE_KEY_FILE
+                        use this file to authenticate the connection
+  -S, --su              run operations with su
+  -R SU_USER, --su-user=SU_USER
+                        run operations with su as this user (default=root)
+  -s, --sudo            run operations with sudo (nopasswd)
+  -U SUDO_USER, --sudo-user=SUDO_USER
+                        desired sudo user (default=root)
+  -T TIMEOUT, --timeout=TIMEOUT
+                        override the SSH timeout in seconds (default=10)
+  -t TREE, --tree=TREE  log output to this directory
+  -u REMOTE_USER, --user=REMOTE_USER
+                        connect as this user (default=wchrisjohnson)
+  --vault-password-file=VAULT_PASSWORD_FILE
+                        vault password file
+  -v, --verbose         verbose mode (-vvv for more, -vvvv to enable
+                        connection debugging)
+  --version             show program's version number and exit

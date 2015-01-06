@@ -1,0 +1,19 @@
+# By default, VMs started by OpenStack will not be able to connect to the
+# internet. If you want your VMs to connect out, and you are running Linux
+# as your host operating system, you must configure your host machine to do
+# network address translation (NAT).
+
+# To enable NAT, issue the following commands in your host, as root:
+# src: https://github.com/lorin/devstack-vm#allow-vms-to-connect-to-the-internet-linux-hosts-only
+
+---
+- hosts: default
+  # sudo: True
+  remote_user: vagrant
+  tasks:
+
+  # turn on ip forwarding
+  - shell: sudo -- sh -c "echo 1 >> /proc/sys/net/ipv4/ip_forward"
+
+  # enable masqerade for eth0 (vagrant controlled) nic
+  - shell: sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE

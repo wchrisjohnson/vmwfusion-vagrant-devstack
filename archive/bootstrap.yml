@@ -1,0 +1,9 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # config.vm.provision :shell, :path => "ansible/bootstrap.sh", :privileged => false
+  - shell: cd /home/vagrant/devstack/ && /home/vagrant/devstack/patched_stack.sh > /home/vagrant/devstack/patched_stack.sh.log
+    register: result
+  - debug: var=result.stdout_lines

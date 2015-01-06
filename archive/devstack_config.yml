@@ -1,0 +1,33 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # install python-apt
+  - name: install python-apt for ansible
+    apt: name=python-apt state=latest
+
+  # install vim
+  - name: install vim
+    apt: name=vim state=latest
+    sudo: True
+
+  # install git
+  - name: ensure git is at the latest version
+    apt: name=git state=latest
+
+  # clone devstack repo
+  - git: repo=https://github.com/openstack-dev/devstack.git
+         dest=/home/vagrant/devstack
+         version=stable/icehouse
+
+  # deal with install bug
+  - name: patch stack.sh to use correct version of pip, create patched_stack.sh
+    shell: cd /home/vagrant/devstack/ && awk '/install_pip.sh/ { print; print "sudo pip install --upgrade setuptools"; next }1' stack.sh > patched_stack.sh
+
+  # make patched_stack.sh executable
+  - file: path=/home/vagrant/devstack/patched_stack.sh state=touch mode=0777
+
+  # create local.conf file
+  - name: generate the local.conf file
+    template: src=templates/devstack.j2 dest=/home/vagrant/devstack/local.conf

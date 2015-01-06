@@ -1,0 +1,16 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # Generate a new public key for demo
+  - command: ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa creates=~/.ssh/id_rsa
+
+  # Creates a keypair with the running users public key
+  - nova_keypair: state=present
+                  login_username=demo
+                  auth_url=http://{{host_ip}}:35357/v2.0/
+                  login_password={{password}}
+                  login_tenant_name=demo
+                  name=demo
+                  public_key="{{lookup('file','~/.ssh/id_rsa.pub')}}"

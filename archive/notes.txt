@@ -1,0 +1,44 @@
+ERROR neutron.openstack.common.rpc.common
+[req-ffd1fd59-1351-423c-8f9d-10683129adf3 None None]
+['Traceback (most recent call last):\n',
+'  File "/opt/stack/neutron/neutron/openstack/common/rpc/amqp.py", line 462, in _process_data\n    **args)\n',
+'  File "/opt/stack/neutron/neutron/common/rpc.py", line 45, in dispatch\n    neutron_ctxt, version, method, namespace, **kwargs)\n',
+'  File "/opt/stack/neutron/neutron/openstack/common/rpc/dispatcher.py", line 172, in dispatch\n    result = getattr(proxyobj, method)(ctxt, **kwargs)\n',
+'  File "/opt/stack/neutron/neutron/db/l3_rpc_base.py", line 57, in sync_routers\n    context, host, router_ids)\n',
+'  File "/opt/stack/neutron/neutron/db/l3_agentschedulers_db.py", line 132, in list_active_sync_routers_on_active_l3_agent\n    context, constants.AGENT_TYPE_L3, host)\n',
+'  File "/opt/stack/neutron/neutron/db/agents_db.py", line 140, in _get_agent_by_type_and_host\n    host=host)\n',
+'AgentNotFoundByTypeHost: Agent with agent_type=L3 agent and host=precise64 could not be found\n']
+
+
+# what to do when script gets hung (another session)
+sudo killall -9 dmidecode
+
+https://communities.vmware.com/docs/DOC-8970
+vcpu.hotadd = FALSE
+
+
+
+
+# to show errors in log files
+grep "ERROR" ./* | sort | uniq -c | sort -r
+
+# to check rabbitmq
+sudo rabbitmqctl -status
+
+# check to see if CPU supports nested virtualization
+sudo kvm-ok
+
+# install kvm
+sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils virt-manager
+
+# run tools/setup-stack-user.sh
+./tools/setup-stack-user.sh vagrant
+
+
+# Reset vmware networking
+sudo rm -f "/Library/Preferences/VMware Fusion/networking"
+"/Library/Preferences/VMware Fusion/vmnet1"
+"/Library/Preferences/VMware Fusion/vmnet8"
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --configure
+
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --status

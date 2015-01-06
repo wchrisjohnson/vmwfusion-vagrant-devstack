@@ -1,0 +1,14 @@
+---
+dest: /opt/stack
+host_ip: 172.16.40.128
+password: stack
+wordpress_ip: 172.24.4.3
+service_token: tokentoken
+swift_hash: 66a3d6b56c1f479c8b4e70ab5c2000f5
+swift_replicas: 1
+branch: stable/icehouse
+reclone: yes
+api_rate_limit: False
+logdays: 2
+upload_script: /home/vagrant/devstack/tools/upload_image.sh
+vagrant_share: vagrant_data

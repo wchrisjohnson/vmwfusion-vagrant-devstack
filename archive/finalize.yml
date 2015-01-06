@@ -1,0 +1,8 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # Transfers the script to the remote host and runs it
+  # Setup DNS and open ports in the security group
+  - script: finalize.sh

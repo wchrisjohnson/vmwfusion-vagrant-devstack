@@ -1,0 +1,35 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # copy the wordpress user data over to the devstack host
+  - name: copy over the user_data file that will be used to install wordpress
+    template: src=templates/wordpress.j2 dest=/home/vagrant/wordpress_user_data.txt
+
+  # fire off the shell script to create the instance+wordpress
+  - script: wordpress.sh
+
+
+  # - name: Launch an Ubuntu 14.04 LTS guest and install wordpress
+  #   nova_compute:
+  #     state: present
+  #     name: wordpress
+  #     login_username: demo
+  #     # login_password: "{{password}}"
+  #     login_password: stack
+  #     login_tenant_name: demo
+  #     key_name: devstack
+  #     # auth_url: "http://{{host_ip}}:35357/v2.0/"
+  #     auth_url: "http://172.16.40.128:35357/v2.0/"
+  #     region_name: RegionOne
+  #     auto_floating_ip: yes
+  #     availability_zone: "nova"
+  #     region_name: nova
+  #     image_name: trusty-server-cloudimg-i386-disk1
+  #     security_groups: default
+  #     wait_for: 200
+  #     flavor_id: 2
+  #     nics:
+  #       - net-id: 7bd2af80-baa9-4486-86f4-c09020bb0cff
+  #     user_data: "{{lookup('file','./wordpress_install.sh')}}"

@@ -1,0 +1,80 @@
+vagrant@trusty64:~$ ifconfig
+br-ex     Link encap:Ethernet  HWaddr 1a:75:37:dd:88:4e
+          inet addr:172.24.4.1  Bcast:0.0.0.0  Mask:255.255.255.0
+          UP BROADCAST RUNNING  MTU:1500  Metric:1
+          RX packets:10 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:3 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:816 (816.0 B)  TX bytes:270 (270.0 B)
+
+br-int    Link encap:Ethernet  HWaddr ee:0d:a8:55:14:49
+          inet6 addr: fe80::c41d:faff:fe60:6c44/64 Scope:Link
+          UP BROADCAST RUNNING  MTU:1500  Metric:1
+          RX packets:11 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:906 (906.0 B)  TX bytes:648 (648.0 B)
+
+eth0      Link encap:Ethernet  HWaddr 00:0c:29:73:4e:02
+          inet addr:192.168.85.140  Bcast:192.168.85.255  Mask:255.255.255.0
+          inet6 addr: fe80::20c:29ff:fe73:4e02/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:313136 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:101523 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:442169065 (442.1 MB)  TX bytes:8919683 (8.9 MB)
+
+eth1      Link encap:Ethernet  HWaddr 00:0c:29:73:4e:0c
+          inet addr:172.16.0.2  Bcast:172.16.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::20c:29ff:fe73:4e0c/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:582 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:673 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:175078 (175.0 KB)  TX bytes:884873 (884.8 KB)
+
+eth2      Link encap:Ethernet  HWaddr 00:0c:29:73:4e:16
+          inet addr:172.16.10.2  Bcast:172.16.10.255  Mask:255.255.255.0
+          inet6 addr: fe80::20c:29ff:fe73:4e16/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:648 (648.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:181262 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:181262 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:115380845 (115.3 MB)  TX bytes:115380845 (115.3 MB)
+
+virbr0    Link encap:Ethernet  HWaddr 8a:3a:45:a7:ed:30
+          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+vagrant@trusty64:~$ sudo ovs-vsctl show
+219c37ba-86a5-429f-9399-13d67d2efecc
+    Bridge br-int
+        fail_mode: secure
+        Port br-int
+            Interface br-int
+                type: internal
+        Port "qr-0874b2e5-3a"
+            tag: 1
+            Interface "qr-0874b2e5-3a"
+                type: internal
+    Bridge br-ex
+        Port br-ex
+            Interface br-ex
+                type: internal
+        Port "qg-4067ef66-6a"
+            Interface "qg-4067ef66-6a"
+                type: internal
+    ovs_version: "2.0.2"

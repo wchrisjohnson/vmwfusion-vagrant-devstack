@@ -1,0 +1,73 @@
+# ===========================================
+# Run provision steps manually
+# ===========================================
+
+
+# -------------------------------------------
+# Create devstack local.conf file and push it to vm
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/devstack_config.yml
+
+
+# -------------------------------------------
+# Bootstrap/provision devstack (stack)
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/bootstrap.yml
+
+
+# -------------------------------------------
+# Enable a guest vm to access public internet
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/enable_outbound_guest_vms.yml
+
+
+# -------------------------------------------
+# Create a new keypair, add it to devstack demo account
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/keypair.yml
+
+
+# -------------------------------------------
+# Setup DNS and open ports in the security group
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/finalize.yml
+
+
+# -------------------------------------------
+# Enable tinyproxy
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/tinyproxy.yml
+
+
+# -------------------------------------------
+# Upload guest OS images into glance
+# -------------------------------------------
+ansible-playbook \
+  --private-key /Users/wchrisjohnson/.vagrant.d/insecure_private_key \
+  -u vagrant \
+  -i ansible/inventory/dev\
+  ansible/upload_images.yml

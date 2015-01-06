@@ -1,0 +1,28 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # =====
+  # Upload images into glance from a local file store.
+  # =====
+
+  # -----
+  #  Cirros images for testing
+  # -----
+
+  # http://cdn.download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img
+  - shell: "{{upload_script}} file:///{{vagrant_share}}/cirros-0.3.1-x86_64-disk.img"
+
+  # http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img
+  - shell: "{{upload_script}} file:///{{vagrant_share}}/cirros-0.3.2-x86_64-disk.img"
+
+  # -----
+  #  Ubuntu 14.04 LTS images for testing
+  # -----
+
+  # http://uec-images.ubuntu.com/trusty/current/trusty-server-cloudimg-i386-disk1.img
+  - shell: "{{upload_script}} file:///{{vagrant_share}}/trusty-server-cloudimg-i386-disk1.img"
+
+  # http://uec-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+  - shell: "{{upload_script}} file:///{{vagrant_share}}/trusty-server-cloudimg-amd64-disk1.img"

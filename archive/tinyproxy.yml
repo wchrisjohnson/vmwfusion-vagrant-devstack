@@ -1,0 +1,35 @@
+---
+- hosts: default
+  remote_user: vagrant
+  tasks:
+
+  # ------------------------------------------
+  # install tinyproxy so I can hit guest VM from host
+  # ------------------------------------------
+
+  - name: install tinyproxy
+    apt: name=tinyproxy state=latest
+    sudo: True
+
+  # ------------------------------------------
+  # Configure the proxy server via config file
+  # ------------------------------------------
+
+  # - Host IP & port to listen on
+  - lineinfile: dest=/etc/tinyproxy.conf state=present regexp='^#Listen 192.168.0.1' line='Listen {{host_ip}}'
+    sudo: True
+  - lineinfile: dest=/etc/tinyproxy.conf state=present regexp='^Port 8888' line='Port 9099'
+    sudo: True
+
+  # - Guest IP address & port
+  - lineinfile: dest=/etc/tinyproxy.conf state=present regexp='^Allow 127.0.0.1' line='Allow {{wordpress_ip}}'
+    sudo: True
+    # Allow 172.24.0.0/16 - maybe use in future...
+  - lineinfile: dest=/etc/tinyproxy.conf line="ConnectPort 80"
+    sudo: True
+
+  # ------------------------------------------
+  # restart tinyproxy
+  # ------------------------------------------
+
+  - command: sudo /etc/init.d/tinyproxy reload
